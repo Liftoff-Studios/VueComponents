@@ -33,7 +33,7 @@
 
         let { loadModule } = window['vue3-sfc-loader'];
         let {createApp, ref} = {Vue};
-        let duh = loadModule("./app.vue")
+        let duh = loadModule("./app.vue", options)
         let foo = createApp(duh).mount("#app") 
         console.log("Hey")
   
