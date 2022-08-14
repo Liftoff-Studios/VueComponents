@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>New webpage</title>
+    </head>
+    <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+    <div id="app"></div>
+    <script>
+    (()=>{
+        let options = {
+      moduleCache: {
+        vue: Vue
+      },
+      async getFile(url) {
+        
+        const res = await fetch(url);
+        if ( !res.ok )
+          throw Object.assign(new Error(res.statusText + ' ' + url), { res });
+        return {
+          getContentData: asBinary => asBinary ? res.arrayBuffer() : res.text(),
+        }
+      },
+      addStyle(textContent) {
+
+        const style = Object.assign(document.createElement('style'), { textContent });
+        const ref = document.head.getElementsByTagName('style')[0] || null;
+        document.head.insertBefore(style, ref);
+      },
+    }
+
+        let { loadModule } = window['vue3-sfc-loader'];
+        let {createApp, ref} = {Vue};
+        let duh = loadModule("./app.vue")
+        let foo = createApp(duh).mount("#app") 
+        console.log("Hey")
+        
+    })()
+    
+    </script>
+    <script></script>
+    </body> 
+</html>
